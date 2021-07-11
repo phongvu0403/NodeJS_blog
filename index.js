@@ -1,14 +1,13 @@
-const express = require('express')
-const morgan = require('morgan')
-const app = express()
-const port = 3000
+var express = require('express');
+var exphbs  = require('express-handlebars');
 
-app.use(morgan('combined'))
+var app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World! Im Phong')
-})
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.get('/', function (req, res) {
+    res.render('home');
+});
+
+app.listen(3000);
